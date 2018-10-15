@@ -1,0 +1,12 @@
+language: python
+python:
+    - '2.7'
+sudo: false
+cache:
+    directories:
+        - "~/.platformio"
+install:
+    - pip install -U platformio
+script:
+    - pushd examples/pack && pio run && popd
+    - pushd examples/unpack && pio run && popd

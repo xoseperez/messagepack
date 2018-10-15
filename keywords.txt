@@ -1,0 +1,53 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Classes (KEYWORD1)
+#######################################
+
+MessagePack	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+addNull KEYWORDS2
+addBoolean KEYWORDS2
+addShort KEYWORDS2
+addInteger KEYWORDS2
+addLong KEYWORDS2
+addFloat KEYWORDS2
+addText KEYWORDS2
+
+getBoolean KEYWORDS2
+getShort KEYWORDS2
+getInteger KEYWORDS2
+getLong KEYWORDS2
+getFloat KEYWORDS2
+getTextLength KEYWORDS2
+getText KEYWORDS2
+
+count KEYWORDS2
+type KEYWORDS2
+length KEYWORDS2
+pack KEYWORDS2
+unpack KEYWORDS2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MESSAGE_PACK_NULL LITERAL1
+MESSAGE_PACK_BOOLEAN LITERAL1
+MESSAGE_PACK_SHORT LITERAL1
+MESSAGE_PACK_INTEGER LITERAL1
+MESSAGE_PACK_LONG LITERAL1
+MESSAGE_PACK_FLOAT LITERAL1
+MESSAGE_PACK_TEXT LITERAL1
+MESSAGE_PACK_MAX LITERAL1
+MESSAGE_PACK_ERROR LITERAL1
