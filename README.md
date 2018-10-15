@@ -2,9 +2,9 @@
 
 MessagePack is a library for AVR, SAMD, ESP8266 and ESP32 platforms to pack/unpack values into a compact, self-explanatory binary message.
 
-[![version](https://img.shields.io/badge/version-1.0.02-brightgreen.svg)](CHANGELOG.md)
-[![travis](https://travis-ci.org/xoseperez/MessagePack.svg?branch=master)](https://travis-ci.org/xoseperez/MessagePack)
-[![codacy](https://img.shields.io/codacy/grade/4ccbea0317c4415eb2d1c562feced407/master.svg)](https://www.codacy.com/app/xoseperez/MessagePack/dashboard)
+[![version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](CHANGELOG.md)
+[![travis](https://travis-ci.org/xoseperez/messagepack.svg?branch=master)](https://travis-ci.org/xoseperez/messagepack)
+[![codacy](https://img.shields.io/codacy/grade/54c6bf3a367745509677e28dfbe1e0d1/master.svg)](https://www.codacy.com/app/xoseperez/messagepack/dashboard)
 [![license](https://img.shields.io/github/license/xoseperez/MessagePack.svg)](LICENSE)
 <br />
 [![donate](https://img.shields.io/badge/donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=xose%2eperez%40gmail%2ecom&lc=US&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHostedGuest)
@@ -100,6 +100,45 @@ loop() {
     }
 
 }
+
+```
+
+## Format
+
+This library works under the following assumptions:
+
+* Data is in little-endian format (least significant byte, is at the lowest address)
+* Integers have a length of 8, 16 or 32 bits (for SHORT, INTEGER and LONG types)
+* Floats are represented in IEEE 754 single-precision format, and have a length of 32 bits
+* Booleans are represented in a byte (1 = true, 0 = false)
+* Strings are ended by the NULL char (0x00)
+
+Data is binary packed with this format:
+
+* First byte: number of values packed in the string
+* N bytes with the information about the data type of each packed value. Each byte have information about 2 packed values, one for each nibble. Data types are coded in this way:
+    * 0b0000: Null
+    * 0b0001: Boolean
+    * 0b0010: Short
+    * 0b0011: Integer
+    * 0b0100: Long
+    * 0b0101: Float
+    * 0b0110: String
+* N bytes of data
+
+```
+The pack string (without spaces) for 17 (short), true (boolean), nil and 452 (integer) are:
+
+03 21 30 11 01 C401
+
+03 is the number of packed values, in this case 3
+21 is the type of the first and second packed values: short and boolean
+30 is the type of the third and fourth packed values: integer and null
+11 is integer 17 (0x11) in hexadecimal 1-byte integer (a.k.a. short)
+01 is boolean true
+C401 is integer 452 (0x01C4) in 2-bytes little-endian
+
+Total length is 7 bytes. Take note that the nil value is only present in the header and has not representation in the data.
 
 ```
 
